@@ -1,0 +1,51 @@
+<mat-card class="col-12 todos-card">
+  <mat-card-title><h2>Current Todos</h2></mat-card-title>
+  <div *ngIf="todos && todos.length > 0">
+    <app-todo-filter [todos]="todos"></app-todo-filter>
+  </div>
+  <ul class="todos">
+    <div *ngFor="let todo of todos; index as i">
+      <li
+        [hidden]="!todo.show"
+        [class.selected]="todo === selectedTodo"
+        class="my-2"
+      >
+        <a
+          href="javascript:void(0);"
+          class="todo-element m-2"
+          (click)="onSelect(todo)"
+        >
+          <span>{{ i + 1 }}</span> {{ todo.name }}
+        </a>
+        <button
+          class="delete-button"
+          mat-raised-button
+          color="warn"
+          (click)="deleteTodo(todo, $event)"
+        >
+          X
+        </button>
+      </li>
+    </div>
+  </ul>
+
+  <button
+    mat-raised-button
+    class="my-3 ml-2"
+    color="accent"
+    (click)="addTodo()"
+    [disabled]="showTodoComponent"
+  >
+    Add todo
+  </button>
+</mat-card>
+
+<mat-card class="my-3" *ngIf="showTodoComponent">
+  <mat-card-content>
+    <app-todo
+      class="todo-component"
+      (closeTodo)="close($event)"
+      #todoComponent
+    ></app-todo>
+  </mat-card-content>
+</mat-card>

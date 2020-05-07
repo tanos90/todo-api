@@ -1,0 +1,23 @@
+body {
+  background-color: #cecece;
+}
+
+.error-message {
+  color: red;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+}
+
+.component-container {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+router-outlet + * {
+  width: 100%;
+}

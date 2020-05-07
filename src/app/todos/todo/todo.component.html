@@ -1,0 +1,67 @@
+<div *ngIf="todo">
+  <form [formGroup]="dynamicForm" class="todo-form">
+    <mat-form-field class="w-50" appearance="outline">
+      <mat-label>Todo Name</mat-label>
+      <input matInput placeholder="" formControlName="todoName" />
+    </mat-form-field>
+    <div *ngIf="submitted && f.todoName.errors" class="invalid">
+      <div *ngIf="f.name.errors.required">
+        Name is required
+      </div>
+    </div>
+
+    <div
+      *ngFor="let item of i.controls; let i = index"
+      class="list-group list-group-flush"
+    >
+      <div class="p-4">
+        <div [formGroup]="item" class="form-row">
+          <div class="col-6">
+            <label></label>
+            <mat-form-field class="w-100" appearance="fill">
+              <mat-label>Item Name</mat-label>
+              <input matInput placeholder="" formControlName="name" />
+            </mat-form-field>
+            <div
+              *ngIf="submitted && item.controls.name.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="item.controls.name.errors.required">
+                Name is required
+              </div>
+            </div>
+          </div>
+          <div class="col-6 row px-4 mx-0 d-flex justify-content-left">
+            <label class="col-12 pl-2 status-label">Status</label>
+            <input
+              class="ml-2"
+              type="checkbox"
+              formControlName="status"
+              name="status"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      class="ml-2 my-3"
+      mat-raised-button
+      color="accent"
+      (click)="onAddItem()"
+    >
+      Add item
+    </button>
+  </form>
+
+  <button
+    class="m-2 w-100"
+    mat-raised-button
+    color="accent"
+    (click)="todoSubmit()"
+  >
+    Save
+  </button>
+  <button class="m-2 w-100" mat-raised-button color="warn" (click)="goBack()">
+    Back
+  </button>
+</div>
